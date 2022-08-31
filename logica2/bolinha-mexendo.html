@@ -1,0 +1,50 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    function trocaCor(cor){
+        pincel.fillStyle = cor;
+    }
+    
+    function desenhaCirculo(x, y, raio) {
+
+        trocaCor();
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function limpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    var x = 20; // o importante é que seja declarado fora da função atualizaTela.
+    var x2 = 1;
+    trocaCor('blue');
+    
+    function atualizaTela() {
+
+        limpaTela();
+        if(x > 600) { 
+            x2 = -1;
+            trocaCor('red'); 
+
+        } else if(x < 0) {
+            x2 = 1;
+            trocaCor('blue');
+            
+        }
+
+        desenhaCirculo(x, 20, 10);
+        x += x2;
+
+    }
+    setInterval(atualizaTela, 10);
+
+</script>
